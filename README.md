@@ -1,8 +1,11 @@
-## PREREQUISITE
-1. Install [Docker](https://docs.docker.com/engine/install/)
-2. Install [Git](https://git-scm.com/)
+## Description
+DCS integration system for **D**HT sensor, **C**CTV, and **S**mart door lock (Tuya) using MQTT with MongoDB database.
 
-## RUN
+## Prerequisite
+1. Install [Git](https://git-scm.com/)
+2. Install [Docker](https://docs.docker.com/engine/install/)
+
+## Run
 1. Clone the repository:
    ```bash
    git clone https://github.com/david-the-IV/mongo_dcs.git
