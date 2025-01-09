@@ -7,7 +7,52 @@ services:
       - "27020:27017"
     volumes:
       - data_dcs:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     restart: always
+
+  rca:
+    build:
+      context: ./rca
+      dockerfile: Dockerfile
+    container_name: rca
+    volumes:
+      - data_dcs:/data/db
+
+  mqtt:
+    image: eclipse-mosquitto:2
+    container_name: mosquitto
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - data_dcs:/data/db
+    restart: unless-stopped
+
+  rtsp_app:
+    image: alpine:latest
+    container_name: rtsp_app
+    volumes:
+      - data_dcs:/data/db
+    command: >
+      sh -c "
+      apk add --no-cache python3 py3-pip && 
+      pip3 install paho-mqtt &&
+      tail -f /dev/null
+      "
+    restart: unless-stopped
+
+  tuya_app:
+    image: alpine:latest
+    container_name: tuya_app
+    volumes:
+      - data_dcs:/data/db
+    command: >
+      sh -c "
+      apk add --no-cache python3 py3-pip && 
+      pip3 install paho-mqtt &&
+      tail -f /dev/null
+      "
+    restart: unless-stopped
 
 volumes:
   data_dcs:
