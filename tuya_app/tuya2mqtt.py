@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 
 mqtt_broker = "mosquitto"
 mqtt_port = 1883
-topic = "sensor/data"
+topic = "tuya/data"
 
 client = mqtt.Client()
 client.connect(mqtt_broker, mqtt_port, 60)
