@@ -1,12 +1,9 @@
 #!/bin/sh
+set -e  # Exit the script if any command fails
 
-# sequential
-# echo "Starting tuya2mqtt.py"
-# python3 tuya2mqtt.py
-
-echo "Starting scripts in parallel"
-python3 tuya2mqtt.py &
-
-# Wait for all background jobs to complete
-wait
-echo "All scripts completed"
+echo "Starting tuya2mqtt.py"
+python3 tuya2mqtt.py
+if [ $? -ne 0 ]; then
+    echo "tuya2mqtt.py failed"
+    exit 1
+fi
