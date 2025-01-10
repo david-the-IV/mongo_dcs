@@ -30,8 +30,9 @@ RUN pip3 install --no-cache-dir \
 # EXPOSE 5000  # Example: exposing port 5000 for Flask app
 
 # Set the default command to run your application
-CMD sh -c "ipcam.py && ipcam_no-windows.py"
-# CMD ["./rtsp_app_start.sh"]
+# CMD sh -c "ipcam.py && ipcam_no-windows.py && mqtt2rtsp.py"
+RUN chmod +x ./rtsp_app_start.sh
+CMD ["./rtsp_app_start.sh"]
 
 RUN pip3 install --no-cache-dir -r requirements.txt
 #  RUN git clone https://github.com/MR12b/TIK-projekt.git
