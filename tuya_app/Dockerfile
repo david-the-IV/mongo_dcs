@@ -30,7 +30,8 @@ RUN pip3 install --no-cache-dir \
 # EXPOSE 5000  # Example: exposing port 5000 for Flask app
 
 # Set the default command to run your application
-# CMD ["./tuya_app_start.sh"]
+RUN chmod +x ./tuya_app_start.sh
+CMD ["./tuya_app_start.sh"]
 
 RUN pip3 install --no-cache-dir -r requirements.txt
 RUN mkdir img
