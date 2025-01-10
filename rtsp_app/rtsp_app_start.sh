@@ -1,17 +1,10 @@
 #!/bin/sh
 set -e  # Exit the script if any command fails
 
-# echo "Starting ipcam.py"
-# python3 ipcam.py
-# if [ $? -ne 0 ]; then
-#     echo "ipcam.py failed"
-#     exit 1
-# fi
-
-echo "Starting ipcam_no-windows.py"
-python3 ipcam_no-windows.py
+echo "Starting rtsp_app.py"
+python3 rtsp_app.py
 if [ $? -ne 0 ]; then
-    echo "ipcam_no-windows.py failed"
+    echo "rtsp_app.py failed"
     exit 1
 fi
 
