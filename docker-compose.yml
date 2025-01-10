@@ -7,29 +7,35 @@ services:
       - "27020:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_ROOT_PASSWORD: pklub2025sukses
     volumes:
       - data_dcs:/data/db
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     restart: always
-
+    networks:
+      - network_dcs
+      
   rtsp_app:
     build:
       context: ./rtsp_app
-      dockerfile: Dockerfile.rtsp_app
+      dockerfile: Dockerfile
     container_name: rtsp_app
     volumes:
       - data_dcs:/data/db
-    restart: unless-stopped
+    restart: always
+    networks:
+      - network_dcs
 
   tuya_app:
     build:
       context: ./tuya_app
-      dockerfile: Dockerfile #Dockerfile.tuya_app
+      dockerfile: Dockerfile
     container_name: tuya_app
     volumes:
       - data_dcs:/data/db
-    restart: unless-stopped
+    restart: always
+    networks:
+      - network_dcs
     
   mqtt:
     image: eclipse-mosquitto:2
@@ -39,8 +45,13 @@ services:
       - "9001:9001"
     volumes:
       - data_dcs:/data/db
-    restart: unless-stopped
+    restart: always
+    networks:
+      - network_dcs
 
 volumes:
   data_dcs:
     driver: local
+
+networks:
+  network_dcs:
