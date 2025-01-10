@@ -1,17 +1,23 @@
 #!/bin/sh
-# sequential
+set -e  # Exit the script if any command fails
+
 # echo "Starting ipcam.py"
 # python3 ipcam.py
-# echo "Starting ipcam_no-windows.py"
-# python3 ipcam_no-windows.py
-# echo "Starting mqtt2rtsp.py"
-# python3 mqtt2rtsp.py
+# if [ $? -ne 0 ]; then
+#     echo "ipcam.py failed"
+#     exit 1
+# fi
 
-echo "Starting scripts in parallel"
-# python3 ipcam.py &
-python3 ipcam_no-windows.py &
-python3 mqtt2rtsp.py &
+echo "Starting ipcam_no-windows.py"
+python3 ipcam_no-windows.py
+if [ $? -ne 0 ]; then
+    echo "ipcam_no-windows.py failed"
+    exit 1
+fi
 
-# Wait for all background jobs to complete
-wait
-echo "All scripts completed"
+echo "Starting mqtt2rtsp.py"
+python3 mqtt2rtsp.py
+if [ $? -ne 0 ]; then
+    echo "mqtt2rtsp.py failed"
+    exit 1
+fi
